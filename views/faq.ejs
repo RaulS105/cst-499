@@ -1,0 +1,146 @@
+<%- include('partials/header.ejs') %>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Expanding/collapsing FAQs</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://use.fontawesome.com/30c21ac8e0.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<ul class="nav nav-tabs">
+				<li ><a data-toggle="tab" href="#tab1" aria-selected="true" class="active">Covid 19 Frequently Asked Questions</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			
+			<div class="tab-content">
+				<div id="tab1" class="tab-pane fade show active">
+					<div class="accordion">
+						<div class="card">
+							<div class="card-header" id="infraOne">
+								<a href="#collapseOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									<p class="mb-0">
+                                        How can I prevent COVID-19? 
+									</p>
+								</a>
+							</div>
+							<div id="collapseOne" class="collapse" aria-labelledby="infraOne" data-parent="#accordion">
+								<div class="card-body">
+                                    <strong>The best way to prevent illness</strong> is to avoid being exposed to the virus and to get vaccinated. In addition, the CDC recommends everyday preventive actions to help prevent the spread of respiratory diseases. They include:
+
+                                    Wash your hands often with plain soap and water. The CDC recommends 
+                                    washing your hands often with soap and water for at least 20 seconds, 
+                                    especially after you have been in a public place, or after blowing your nose, 
+                                    coughing, or sneezing. If soap and water are not available, the CDC recommends 
+                                    using an alcohol-based hand sanitizer that contains at least 60 percent alcohol.
+                                    <br>
+
+                                    <strong>Cover your mouth and nose</strong> with a mask when around others. Find more information about how to select, wear, and clean your mask.
+
+                                    Get the COVID-19 vaccine. When you are fully vaccinated, you may be able to start doing some things that you had stopped doing because of the pandemic.
+
+                                    Follow CDC guidance on large gatherings, social distancing and mask wearing, based on if you are fully vaccinated or not.
+								</div>
+							</div>
+						</div><!-- close card-->
+						<div class="card">
+							<div class="card-header" id="infraTwo">
+								<a href="#collapseTwo" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								  <p class="mb-0">Testing for SARS-CoV-2</p>
+								</a>
+							</div>
+							<div id="collapseTwo" class="collapse" aria-labelledby="infraTwo" data-parent="#accordion">
+								<div class="card-body">
+                                    <strong>This section </strong> provides answers to frequently asked questions relating to the development and performance of tests for SARS-CoV-2. 
+                                        These questions and answers provide additional clarity on existing policies and do not introduce any new policies or modify any existing policies.
+                                        <br>
+                                    <strong>How do I know I need to be tested?</strong>
+                                        <br>
+                                    - Centers for Disease Control and Prevention (CDC) recommends that you contact your healthcare provider if you are experiencing symptoms such as fever, cough and shortness of breath; 
+                                      if you’ve been in contact with a person who has COVID-19; or if you have traveled recently from an area with sustained, ongoing transmission. 
+                                    
+								</div>
+							</div>
+						</div><!-- card-->
+						<div class="card">
+							<div class="card-header" id="infraThree">
+								<a href="#collapseThree" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									<p class="mb-0">Where can I find more information about Covid 19?</p>
+								</a>
+							</div>
+							<div id="collapseThree" class="collapse" aria-labelledby="infraThree" data-parent="#accordion">
+								<div class="card-body">
+                                    Visit the website of the <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Centers for Disease Control and Prevention (CDC)</a> website for the most-current information. 
+                                    Your state and local health authorities are also good sources of information. 
+								</div>
+							</div>
+                            <div class="card">
+                                <div class="card-header" id="infraFour">
+                                    <a href="#collapseFour" class="collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                        <p class="mb-0">Testing Supplies: FAQs on Testing for SARS-CoV-2</p>
+                                    </a>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="infraFour" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <strong>Food and Drug Administration (FDA) </strong> plays a key role in protecting the United States against dangers such as developing infectious illnesses, such as the Coronavirus Disease 2019 (COVID-19) pandemic.
+                                        The FDA is dedicated to providing timely guidelines to enhance pandemic response activities.
+                                        For the period of the public health emergency, the FDA is providing this guideline to establish a policy to help speed the availability of 
+                                        innovative coronavirus (COVID-19) tests developed by laboratories and commercial producers. 
+                                        Rapid diagnosis of COVID-19 cases in the United States need widespread testing in order to stop the spread of this fast spreading, serious sickness. 
+                                        <br><br>
+                                        Nose swabbing is a common tool to use for testing for Sars-CoV-2. Going to a local doctor or pharmacy can give you results for covid in 1-2 days time.
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="infraFour">
+                                        <a href="#collapseFive" class="collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                            <p class="mb-0">Face Masks, Barrier Face Coverings, Surgical Masks, and Respirators for COVID-19</p>
+                                        </a>
+                                    </div>
+                                    <div id="collapseFive" class="collapse" aria-labelledby="infraFive" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <strong>This article</strong> contains information about face masks, barrier face coverings, surgical masks, and respirators
+                                            (filtering facepiece respirators, such as N95 respirators) designed for medical use to aid in the prevention of 
+                                            infectious material dissemination during the COVID-19 pandemic.
+                                            <br>
+                                            This page does not address:
+                                            <br><br>
+                                            <ul>
+                                            <li>Powered respirators, such as powered air purifying respirators, are available (PAPRs)</li>
+                                            <li>Face masks</li>
+                                            <li>Non-healthcare application of face masks and respirators to minimize industrial or general exposure to
+                                                non-infectious particles, such as during building or other industrial use.</li>
+                                            </ul>
+                                            <br>
+                                            Manufacturers and importers of face masks, barrier face coverings, surgical masks, and respirators, as well as healthcare institutions and staff, may find the information supplied beneficial.
+                                            To assist in increasing the availability of face masks, barrier face coverings, surgical masks, and respirators, the FDA is providing certain regulatory 
+                                            flexibility for the duration of the COVID-19 public health emergency, as described in the Enforcement Policy for Face Masks and Respirators During the Coronavirus Disease 
+                                            (COVID-19) Public Health Emergency, and has issued emergency use authorization for face masks, surgical masks, and respirators that meet certification requirements.
+                                        </div>
+                                    </div>
+						</div><!-- card-->
+					</div><!-- accordion-->
+				</div><!-- tab 1-->
+						</div>
+					</div>
+				</div><!-- accordion-->
+			</div><!-- tab2 -->
+		  </div><!-- tab content-->
+		</div>
+	</div>
+</div>	
+
+	</body>
+</html>
+
+<%- include('partials/footer.ejs') %>

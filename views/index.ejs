@@ -1,0 +1,79 @@
+<%- include('partials/header.ejs') %>
+<body>
+  <div class="jumbotron">
+    <h1 class="display-4">COVID19-Dashboard</h1>
+    <p class="lead">This is placeholder text for our capstone project.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Login</a>
+    </p>
+  </div>
+   <div class="container">
+    <div id="warning-area">
+       <% if(typeof loginError != "undefined" && loginError) { %>
+       <div class="alert alert-success" role="alert">
+           <%-message%>
+       </div>
+       <% } %> 
+   </div>
+</div>
+<div id="introduction" class="container-fluid">
+  <h1>Introduction</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis dolor mauris, non lobortis ex lacinia id. Aliquam et arcu 
+    sit amet magna eleifend iaculis ornare quis risus. Donec sit amet tortor dolor. Fusce sollicitudin gravida pretium. Donec sollicitudin tempor commodo. 
+    Suspendisse tortor augue, ultrices elementum sodales ut, lobortis ut augue. Nullam non purus ligula. Phasellus nec luctus dui, id malesuada orci. Nam sapien 
+    massa, egestas et vestibulum eget, ornare sed felis. Integer porta velit eget sapien vestibulum dignissim. Sed id gravida mauris. Vestibulum vitae finibus erat. 
+    Fusce ornare turpis risus, vitae lacinia eros blandit a. Phasellus aliquam quam eu felis viverra auctor in aliquam risus. Proin ornare interdum quam, ut dignissim 
+    quam molestie vitae. Vivamus gravida tempor molestie.</p>
+</div>
+<div id="front-page-links" class="container-fluid">
+
+</div>
+       <div class="container-fluid">
+           <div class="row fp-card-row">
+             <div class="col-3 fp-card">
+             <span class="fa-stack fa-2x">
+               <i class="fas fa-circle fa-stack-2x"></i>
+               <i class="fas fa-database fa-stack-1x fa-inverse"></i>
+             </span>
+               <h2>Statistics</h2>
+               <p>View the latest schedules around the league.</p>
+               <p><a class="btn btn-secondary" href="/statistics" role="button">View Scores &raquo;</a></p>
+             </div><!-- /.col-lg-4 -->
+             <div class="col-3 fp-card">
+             <span class="fa-stack fa-2x">
+               <i class="fas fa-circle fa-stack-2x"></i>
+               <i class="fas fa-syringe fa-stack-1x fa-inverse"></i>
+             </span>
+               <h2>Vaccinations</h2>
+               <p>Purchase tickets for upcoming sporting events.</p>
+               <p><a class="btn btn-secondary" href="/vaccinations" role="button">View tickets &raquo;</a></p>
+             </div><!-- /.col-lg-4 -->
+             <div class="col-3 fp-card">
+             <span class="fa-stack fa-2x">
+               <i class="fas fa-circle fa-stack-2x"></i>
+               <i class="fas fa-newspaper fa-stack-1x fa-inverse"></i>
+             </span>
+               <h2>News</h2>
+               <p>Purchase stuff from our store!</p>
+               <p><a class="btn btn-secondary" href="/news" role="button">View store &raquo;</a></p>
+             </div><!-- /.col-lg-4 -->
+             <div class="col-3 fp-card">
+              <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-question fa-stack-1x fa-inverse"></i>
+              </span>
+                <h2>FAQ</h2>
+                <p>View the latest schedules around the league.</p>
+                <p><a class="btn btn-secondary" href="/faq" role="button">View Scores &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+           </div><!-- /.row -->
+       </div>
+
+
+
+
+<%- include('partials/footer.ejs') %>
+</body>
+</html

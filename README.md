@@ -1,1 +1,2 @@
-# cst-499
+# covid19-dashboard
+CST499 Capstone Project
