@@ -1,0 +1,20 @@
+<%- include('partials/header.ejs') %>
+<div class="container">
+    <form action="/login">
+  
+      <label for="fname"><Strong>First Name</Strong></label>
+      <input type="text" id="fname" name="firstname" placeholder="Your name..">
+  
+      <label for="lname"><Strong>Last Name</Strong></label>
+      <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+  
+      <label for="subject"><Strong>Message</Strong></label>
+      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+  
+      <input type="submit" value="Submit">
+  
+    </form>
+  </div>
+
+  <br><br><br>
+<%- include('partials/footer.ejs') %>

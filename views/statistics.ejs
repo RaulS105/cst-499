@@ -2,4 +2,30 @@
 <h1>Stats here</h1>
 
 
+
+<h2>California Stuff</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">County</th>
+        <th scope="col">Population</th>
+        <th scope="col">Daily Cases</th>
+        <th scope="col">Daily Deaths</th>
+        <th scope="col">Total Cases</th>
+        <th scope="col">Total Deaths</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for (var i = 0; i <= countyArray.length;  i++ ) { %>
+      <tr>
+        <td><%= countyArray[i] %></td>
+        <td><%= populationArray[i] %></td>
+        <td><%= confirmedDailyArray[i] %></td>
+        <td><%= deathsDailyArray[i] %></td>
+        <td><%= totalConfirmedArray[i] %></td>
+        <td><%= totalDeathsArray[i] %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
 <%- include('partials/footer.ejs') %>

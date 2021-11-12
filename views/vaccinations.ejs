@@ -1,5 +1,30 @@
 <%- include('partials/header.ejs') %>
-<h1>Vaccinations Here</h1>
 
+<html>
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <div class="jumbotron">
+    <h1 class="display-4">Local Covid 19 Vaccination Appointments</h1>
+    <p class="lead">These are local hospitals around your area within a 20 mile radius that will allow vaccination appointments.</p>
+    <hr class="my-4">
+    <p>Continue to click on a marker to pursue to a new webpage.</p>
+    </p>
+  </div>
+</head>
+
+<body>
+
+  <div id="panel"></div>
+
+  <!-- Map appears here -->
+  <div id="map"></div>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBavL7hJ05_Ty_q3IgbwVOLflE-yufs_Ik&libraries=places&callback=initMap">
+  </script>
+</body>
+
+</html>
 
 <%- include('partials/footer.ejs') %>

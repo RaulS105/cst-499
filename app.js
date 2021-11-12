@@ -2,52 +2,138 @@
 const express = require("express");
 const app = express();
 // const pool = require("./dbPools.js");
-// const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const session = require('express-session');
 const bcrypt = require("bcrypt");
 const mysql = require('mysql');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+
+require('./passport');
 
 const port = 3000
 
 app.engine('html', require('ejs').renderFile);
 app.use(express.static("public"));
 
-app.use(session({
-    secret: "top Secret!",
-    resave: true,
-    saveUninitialized: true
-}))
-
-// function createDBConnection() {
-//     var conn = mysql.createPool({
-//         connectionLimit: 10,
-//         host: "de1tmi3t63foh7fa.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-//         user: "svwvjtxw27jdshva",
-//         password: "fdwslyjayg4pu6oo",
-//         database: "b5u5zeiyntiu2as3"
-//     });
-//     return conn;
-// };
+//Configure Session Storage
+app.use(cookieSession({
+    name: 'session-name',
+    keys: ['key1', 'key2']
+  }))
+app.use(passport.initialize());
+app.use(passport.session());
+  
+function createDBConnection() {
+    var conn = mysql.createPool({
+        connectionLimit: 10,
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "covid19-dashboard"
+    });
+    return conn;
+};
 
 app.use(express.urlencoded({extended: true}));
 
-
+// Middleware - Check user is Logged in
+const checkUserLoggedIn = (req, res, next) => {
+    req.user ? next(): res.sendStatus(401);
+}
 
 //Routing
-app.get("/", function(req, res){
-	res.render("index.ejs");
+app.get("/", async function(req, res){
+
+    //Get current day to pull statistics
+    var currentDate = new Date();
+    var month = currentDate.getUTCMonth() + 1; //months from 1-12
+    var day = currentDate.getUTCDate() - 2;
+    if(day < 10)
+        day = "0" + day;
+    var year = currentDate.getUTCFullYear();
+    currentDate = year + "-" + month + "-" + day;
+
+    var url = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/global?country=US&min_date=" + currentDate + "T00:00:00.000Z";
+	
+    const data = await getData(url);
+    console.log(data);
+    
+    let dailyDeaths = data[0].deaths_daily;
+    let dailyConfirmedCases = data[0].confirmed_daily;
+    let totalConfirmedCases = data[0].confirmed;
+    let totalDeaths = data[0].deaths;
+
+    // let dailyDeaths = truncate(data[0].deaths_daily);
+    // let dailyConfirmedCases = truncate(data[0].confirmed_daily);
+    // let totalConfirmedCases = truncate(data[0].confirmed);
+    // let totalDeaths = truncate(data[0].deaths);
+
+    res.render("index.ejs", {"dailyDeaths": dailyDeaths, "dailyConfirmedCases": dailyConfirmedCases,
+                             "totalConfirmedCases": totalConfirmedCases, "totalDeaths": totalDeaths,
+                             "currentDate": currentDate
+    });
 });
 
-app.get("/statistics", function(req, res){
-	res.render("statistics.ejs");
+app.get('/profile', checkUserLoggedIn, (req, res) => {
+    res.send(`<h1>${req.user.displayName}'s Profile Page</h1>`)
+  });
+
+app.get("/statistics", async function(req, res){
+
+    let countyArray = [];
+    let populationArray = [];
+    let totalConfirmedArray = [];
+    let totalDeathsArray = [];
+    let confirmedDailyArray = [];
+    let deathsDailyArray = [];
+    let url = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/us_only?min_date=2021-11-06T00:00:00.000Z&state=California";
+    const data = await getData(url);
+
+    let countiesCount = Object.keys(data).length;
+
+    for(let i = 0; i < countiesCount; i++) {
+        countyArray.push(data[i].county);
+        populationArray.push(data[i].population);
+        totalConfirmedArray.push(data[i].confirmed);
+        totalDeathsArray.push(data[i].deaths);
+        confirmedDailyArray.push(data[i].confirmed_daily);
+        deathsDailyArray.push(data[i].deaths_daily);
+    }
+
+	res.render("statistics.ejs", {"countyArray": countyArray, "populationArray": populationArray,
+                                "totalConfirmedArray": totalConfirmedArray, "totalDeathsArray":totalDeathsArray,
+                                 "confirmedDailyArray": confirmedDailyArray, "deathsDailyArray": deathsDailyArray
+    });
 });
 
 app.get("/vaccinations", function(req, res){
 	res.render("vaccinations.ejs");
 });
 
-app.get("/news", function(req, res){
-	res.render("news.ejs");
+app.get("/news", async function(req, res){
+
+
+    let articleArray = [];
+    let titleArray = [];
+    let descriptionArray =[];
+    let contentArray =[];
+    let url = `https://newsapi.org/v2/everything?q=Covid_19&apiKey=2aac52b40ffd48ce82355f1ec110f4a4`;
+
+    const data = await getData(url);
+
+    let article = Object.keys(data).length;
+    
+    for(let i = 0; i < 20; i++)
+    {
+        articleArray.push(data.articles[i].author);
+        titleArray.push(data.articles[i].title);
+        descriptionArray.push(data.articles[i].description);
+        contentArray.push(data.articles[i].urlToImage);
+    }
+
+    res.render("news.ejs",{"articleArray": articleArray, "titleArray": titleArray,
+                            "descriptionArray": descriptionArray, "contentArray":contentArray});
 });
 
 app.get("/faq", function(req, res){
@@ -55,65 +141,41 @@ app.get("/faq", function(req, res){
 });
 
 app.get("/contact", function(req, res){
-	res.render("contact.ejs");
+	res.render("contact.html");
 });
 
-app.get("/login", function(req, res){
-	res.render("login.ejs");
-});
+// Auth Routes
+app.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get("/login", function(req,res){
-    
-    let sql = "SELECT * FROM users";
-	pool.query(sql, function (err, rows, fields) {
-        if (err) throw err;
-	
-    
-    if(req.session.authenticated) {
-   //Get Login Table
-        res.render("login.ejs", {"currentLogin":true, "rows":rows});
-   } else {
-        res.render("login.ejs",{"currentLogin":false, "rows":rows});
-   }
-	});
-});
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
 
-app.post("/login", async function(req,res){
-    let username = req.body.username;
-    let password = req.body.password;
-    let checkbox = req.body.checkbox;
-    
-    let result = await checkUsername(username);
-    
-    let hashedPwd = "";
-    if (result.length > 0){
-        hashedPwd = result[0].pass;
-    }
-    
-    let passwordMatch = await checkPassword(password,hashedPwd);
-
-    if (checkbox == undefined) {
-        res.render("login.ejs", {"loginError":true, "message":"You did not agree to the terms before logging in."})    
-    } else if (username == "user1" && passwordMatch) {
-        req.session.authenticated = true;
-        res.render("index.ejs", {"loginError":true, "message": "You have succesfully logged in!"});
-    } else {
-        res.render("login.ejs", {"loginError":true, "message":"Wrong Credentials entered, please try again!"});
-    }
+//Logout
+app.get('/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/');
 })
-
-app.get("/logout", function(req, res){
-    req.session.destroy();
-    res.render("index.ejs");
-})
-  
 
 //Utility Functions
-function checkUsername(username) {
-    let sql = "SELECT * FROM users WHERE username = ?";
+async function getData(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
+function checkEmail(email) {
+    let sql = "SELECT * FROM users WHERE email = ?";
     return new Promise(function(resolve, reject) {
         let conn = createDBConnection();
-        conn.query(sql, [username], function(err, rows, fields) {
+        conn.query(sql, [email], function(err, rows, fields) {
             if (err) throw err;
             console.log("Rows found: " + rows.length);
             resolve(rows);
@@ -129,6 +191,17 @@ function checkPassword(password, hashedValue) {
         })
     })
 }
+
+function truncate(str) {
+    console.log("Before: " + str);
+    str = str.toString();
+    if (str.length >= 4) {
+      str = str.substr(0, str.length - 3);
+      str = parseInt(str);
+    }
+      console.log("After: " + str);
+      
+  }
 
 
 //Starting Server

@@ -1,5 +1,31 @@
 <%- include('partials/header.ejs') %>
-<h1>Login or Register Here</h1>
+    <h1 class="text-center">Login</h1>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <form method="POST" action="/login">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">Please enter your email address</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <small id="emailHelp" class="form-text text-muted">Please enter your password</small>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">I agree to all stuff</label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <p class="text-center">Don't have an account? Click this <a href="">link</a> to get create one.</p>
+                </form>
+            </div>
+        </div>
+    </div>
 
-
-<%- include('partials/footer.ejs') %>
+    <%- include('partials/footer.ejs') %>

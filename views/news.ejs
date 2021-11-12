@@ -1,5 +1,27 @@
 <%- include('partials/header.ejs') %>
-<h1>News Here</h1>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Author</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    <% for (var i =0; i <= 20;  i++ ) { %>
+      <tr>
+        <td><%= articleArray[i] %></td>
+        <td><%= titleArray[i] %></td>
+        <td><%= descriptionArray %></td>
+        
+        <td><img width="300" height="300" src=<%= contentArray[i] %></td>
+        
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
 
 
 <%- include('partials/footer.ejs') %>
