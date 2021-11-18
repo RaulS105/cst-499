@@ -8,8 +8,8 @@ const bcrypt = require("bcrypt");
 const mysql = require('mysql');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-
 require('./passport');
+const truncate = require('./public/js/main.js');
 
 const port = 3000
 
@@ -46,6 +46,7 @@ const checkUserLoggedIn = (req, res, next) => {
 app.get("/", async function(req, res){
 
     //Get current day to pull statistics
+    var longDate = new Date();
     var currentDate = new Date();
     var month = currentDate.getUTCMonth() + 1; //months from 1-12
     var day = currentDate.getUTCDate() - 2;
@@ -64,10 +65,10 @@ app.get("/", async function(req, res){
     let totalConfirmedCases = data[0].confirmed;
     let totalDeaths = data[0].deaths;
 
-    // let dailyDeaths = truncate(data[0].deaths_daily);
-    // let dailyConfirmedCases = truncate(data[0].confirmed_daily);
-    // let totalConfirmedCases = truncate(data[0].confirmed);
-    // let totalDeaths = truncate(data[0].deaths);
+    dailyDeaths = truncate(dailyDeaths);
+    dailyConfirmedCases = truncate(dailyConfirmedCases);
+    totalConfirmedCases = truncate(totalConfirmedCases);
+    totalDeaths = truncate(totalDeaths);
 
     res.render("index.ejs", {"dailyDeaths": dailyDeaths, "dailyConfirmedCases": dailyConfirmedCases,
                              "totalConfirmedCases": totalConfirmedCases, "totalDeaths": totalDeaths,
@@ -191,18 +192,6 @@ function checkPassword(password, hashedValue) {
         })
     })
 }
-
-function truncate(str) {
-    console.log("Before: " + str);
-    str = str.toString();
-    if (str.length >= 4) {
-      str = str.substr(0, str.length - 3);
-      str = parseInt(str);
-    }
-      console.log("After: " + str);
-      
-  }
-
 
 //Starting Server
 app.listen(port, () => {

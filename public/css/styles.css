@@ -3,12 +3,13 @@
   height: 100%;
   background-color: grey;
 }
-
-html,
-body {
-  height: 70%;
-  margin: 0;
-  padding: 0;
+a {
+  color: #3768c3;
+  text-decoration: none;
+}
+a:hover {
+  color:#3768c3;
+  text-decoration: none;
 }
 #panel {
   height: 70%;
@@ -43,11 +44,6 @@ p {
   color: darkslategrey;
 }
 
-a {
-  text-decoration: none;
-  color: cadetblue;
-}
-
 input[type=text], select, textarea {
   width: 100%; 
   padding: 12px; 
@@ -73,8 +69,30 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
+/* Front Page Styles */
+h1,h2,h3,h4 {
+  font-weight: 300;
+}
+.text-gray {
+  color: gray;
+}
+.jumbotron {
+  margin-bottom: 0;
+}
+.section-bg {
+  background-color: #f7f7f7;
+}
+.section {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+span.blue {
+  width: 3.5rem;
+  color: white;
+  background-color: #3768c3;
+  padding: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; 
 }

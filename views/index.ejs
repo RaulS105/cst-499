@@ -22,9 +22,9 @@
       </div>
     </div>
     <!--Introduction/Mission Statement-->
-    <div class="section-bg">
+    <div class="section-bg section">
       <div id="mission-statement" class="container section-bg">
-        <h2 class="text-center">Introduction</h1>
+        <h2 class="text-center">Mission Statement</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis dolor mauris, non lobortis ex lacinia
             id. Aliquam et arcu
             sit amet magna eleifend iaculis ornare quis risus. Donec sit amet tortor dolor. Fusce sollicitudin gravida
@@ -39,7 +39,7 @@
       </div>
     </div>
     <!--Focus Areas of Site-->
-    <div id="focus-areas" class="container">
+    <div id="focus-areas" class="container section">
       <h2 class="text-center">Focus Areas</h2>
       <div class="row fp-card-row">
         <div class="col fp-card text-center">
@@ -47,18 +47,16 @@
             <i class="fas fa-circle fa-stack-2x"></i>
             <i class="fas fa-database fa-stack-1x fa-inverse"></i>
           </span>
-          <h2 class="text-center">Statistics</h2>
+          <a href="/statistics"><h2 class="text-center">Statistics</h2></a>
           <p>View Statistics for local and US</p>
-          <p><a class="btn btn-secondary" href="/statistics" role="button">View Statistics &raquo;</a></p>
         </div><!-- /.col-lg-6 -->
         <div class="col fp-card text-center">
           <span class="fa-stack fa-2x">
             <i class="fas fa-circle fa-stack-2x"></i>
             <i class="fas fa-syringe fa-stack-1x fa-inverse"></i>
           </span>
-          <h2 class="text-center">Vaccinations</h2>
+          <a href="/vaccinations"><h2 class="text-center">Vaccinations</h2></a>
           <p>View resources for vaccinations</p>
-          <p><a class="btn btn-secondary" href="/vaccinations" role="button">View Vaccinations &raquo;</a></p>
         </div><!-- /.col-lg-6 -->
       </div>
       <div class="row fp-card-row">
@@ -67,42 +65,38 @@
             <i class="fas fa-circle fa-stack-2x"></i>
             <i class="fas fa-newspaper fa-stack-1x fa-inverse"></i>
           </span>
-          <h2>News</h2>
+          <a href="/news"><h2 class="text-center">News</h2></a>
           <p>View latest COVID-19 articles</p>
-          <p><a class="btn btn-secondary text-center" href="/news" role="button">View News &raquo;</a></p>
         </div><!-- /.col-lg-6 -->
         <div class="col-6 fp-card text-center">
           <span class="fa-stack fa-2x">
             <i class="fas fa-circle fa-stack-2x"></i>
             <i class="fas fa-question fa-stack-1x fa-inverse"></i>
           </span>
-          <h2>FAQ</h2>
+          <a href="/faq"><h2 class="text-center">FAQ</h2></a>
           <p>View Frequently Asked Questions</p>
-          <p><a class="btn btn-secondary" href="/faq" role="button">View FAQ &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div>
     </div>
     <!--Current Statistics-->
-    <div class="section-bg">
-      <div class="container">
-        <h2 class="text-center">Current Statistics</h2>
+    <div class="section-bg section">
+      <div class="container-fluid">
+        <h2 class="text-center mb-3">Current Statistics</h2>
         <div class="row">
-          <div class="col-6 text-center">
-            <p>Daily Confirmed Cases: <%= dailyConfirmedCases %>
+          <div class="col-3 text-center">
+            <h4 class="mb-3">Daily Confirmed Cases</h4><span class="blue"><%= dailyConfirmedCases %></span>
           </div>
-          <div class="col-6 text-center">
-            <p>Daily Confirmed Deaths: <%= dailyDeaths %>
+          <div class="col-3 text-center">
+            <h4 class="mb-3">Daily Confirmed Deaths</h4><span class="blue"><%= dailyDeaths %></span>
+          </div>
+          <div class="col-3 text-center">
+            <h4 class="mb-3">Total Confirmed Cases</h4><span class="blue"><%= totalConfirmedCases %></span>
+          </div>
+          <div class="col-3 text-center">
+            <h4 class="mb-3">Total Deaths</h4><span class="blue"><%= totalDeaths %></span>
           </div>
         </div>
-        <div class="row">
-          <div class="col-6 text-center">
-            <p>Total Confirmed Cases: <%= totalConfirmedCases %>
-          </div>
-          <div class="col-6 text-center">
-            <p>Total Deaths: <%= totalDeaths %>
-          </div>
-        </div>
-        <p class="text-center">Data from <%= currentDate %></p>
+        <p class="text-center font-weight-light font-italic text-gray mt-5">Total statistics reflect all cases in the United States as of <%= currentDate %></p>
       </div>
     </div>
 
